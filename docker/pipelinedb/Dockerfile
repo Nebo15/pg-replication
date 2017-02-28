@@ -16,14 +16,15 @@ RUN mv /usr/lib/postgresql/9.5/lib/* /usr/lib/pipelinedb/lib/pipelinedb/ && \
     mv /usr/lib/postgresql/9.5/bin/* /usr/lib/pipelinedb/bin/ && \
     mv /usr/share/postgresql/9.5/extension/* /usr/lib/pipelinedb/share/pipelinedb/extension/
 
-RUN apt-get install -y vim mc
-
-COPY pipelinedb.conf /scripts/conf/
-#COPY pg_hba.conf /scripts/conf/
-COPY configure_pg_hba.sh /
-RUN /configure_pg_hba.sh
+#RUN apt-get install -y vim mc
 
 ENV TERM=xterm \
     PGDATA=/mnt/pipelinedb/data \
-    MASTER_HOST=172.17.0.2 \
-    REPLICA_HOST=172.17.0.3
+    # For test purposes on a local Docker
+    MASTER_HOST=172.17.0.2/32 \
+    REPLICA_HOST=172.17.0.3/32
+
+COPY pipelinedb.conf /scripts/conf/
+COPY configure_pg_hba.sh /scripts/conf/
+RUN /scripts/conf/configure_pg_hba.sh
+
