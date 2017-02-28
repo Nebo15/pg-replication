@@ -26,7 +26,7 @@ RUN docker-entrypoint-initdb.d/configure_postgresql.sh
 COPY dbinit.sh /
 
 ENV TERM=xterm \
-    MASTER_HOST=master-svc \
-    REPLICA_HOST=replica-svc
+    MASTER_HOST=172.17.0.2/32 \
+    REPLICA_HOST=172.17.0.3/32
 
 CMD ["postgres"]
