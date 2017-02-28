@@ -1,7 +1,7 @@
 FROM nebo15/alpine-postgre:9.6
 LABEL maintainter <support@nebo15.com>
 
-RUN apk add --update vim less mc
+#RUN apk add --update vim less mc
 
 RUN apk update && \
     apk add --no-cache build-base \
